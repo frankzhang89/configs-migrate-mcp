@@ -1,0 +1,12 @@
+/target/
+/.idea/
+*.iml
+/.vscode/
+/.env
+# Keep real connection settings and credentials out of Git at every directory level.
+application.yml
+application.yaml
+/application-local.yml
+/application-local.yaml
+/logs/
+/log/
