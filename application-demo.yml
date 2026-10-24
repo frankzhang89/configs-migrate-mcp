@@ -1,0 +1,46 @@
+# Copy this file to application.yml and replace the demo values before deployment.
+# Real application.yml files are deliberately excluded from version control.
+server:
+  port: ${SERVER_PORT:8284}
+spring:
+  application:
+    name: configs-migrate-mcp
+  ai:
+    mcp:
+      server:
+        name: configs-migrate-mcp
+        version: 0.1.0
+        type: SYNC
+        # Use true only when an MCP client manages the process and its stdin/stdout.
+        stdio: false
+        protocol: STREAMABLE
+        streamable-http:
+          mcp-endpoint: /mcp
+        instructions: >-
+          Read published Apollo configurations, explicitly convert properties/YAML when needed,
+          and read or publish Nacos configurations. Publishing replaces the complete target
+          document and never converts it. If content is already in the target format, publish
+          it directly, regardless of the source format. Read back to verify after publishing.
+migrate:
+  http:
+    connect-timeout: 3s
+    read-timeout: 10s
+  from:
+    apollo:
+      meta: ${APOLLO_META:http://apollo.example.com:8080}
+      app-id: ${APOLLO_APP_ID:demo-app}
+      cluster: default
+      namespace: application
+      file-type: properties
+      # For authenticated Apollo, inject a real key instead of a demo key such as demo-apollo-key.
+      access-key: ${APOLLO_ACCESS_KEY:}
+  to:
+    nacos:
+      server-addr: ${NACOS_SERVER_ADDR:nacos.example.com:8848}
+      context-path: /nacos
+      username: ${NACOS_USERNAME:demo-user}
+      password: ${NACOS_PASSWORD:demo-password}
+      # A non-public namespace must use its ID rather than its display name.
+      namespace: ""
+      group: DEFAULT_GROUP
+      file-type: yaml

@@ -1,0 +1,7 @@
+simulation: configs-migrate-dev
+routing: path
+mocks:
+  - routeKey: apollo
+    path: ../mocks/apollo/config.yaml
+  - routeKey: nacos
+    path: ../mocks/nacos/config.yaml

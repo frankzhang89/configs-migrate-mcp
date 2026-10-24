@@ -1,0 +1,28 @@
+# Start with --spring.config.additional-location=file:./config/application-example.yml
+spring:
+  ai:
+    mcp:
+      server:
+        # Set true only when an MCP client owns the process and its stdin/stdout pipes.
+        stdio: false
+migrate:
+  http:
+    connect-timeout: 3s
+    read-timeout: 10s
+  from:
+    apollo:
+      meta: ${APOLLO_META:http://apollo.example.com:8080}
+      app-id: ${APOLLO_APP_ID:demo-app}
+      cluster: default
+      namespace: application
+      file-type: properties
+      access-key: ${APOLLO_ACCESS_KEY:}
+  to:
+    nacos:
+      server-addr: ${NACOS_SERVER_ADDR:nacos.example.com:8848}
+      context-path: /nacos
+      username: ${NACOS_USERNAME:demo-user}
+      password: ${NACOS_PASSWORD:demo-password}
+      namespace: ""
+      group: DEFAULT_GROUP
+      file-type: yaml

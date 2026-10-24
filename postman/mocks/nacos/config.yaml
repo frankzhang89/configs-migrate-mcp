@@ -1,0 +1,9 @@
+version: 1
+name: nacos-config-2x
+slug: nacos-config-2x
+protocol: http
+interceptRequests: true
+scenarios:
+  - name: default
+    path: ./default.js
+    default: true

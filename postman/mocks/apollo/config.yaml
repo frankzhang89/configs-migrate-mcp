@@ -1,0 +1,9 @@
+version: 1
+name: apollo-published-config
+slug: apollo-published-config
+protocol: http
+interceptRequests: true
+scenarios:
+  - name: default
+    path: ./default.js
+    default: true
